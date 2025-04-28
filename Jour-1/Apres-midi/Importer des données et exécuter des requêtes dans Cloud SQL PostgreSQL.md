@@ -46,21 +46,13 @@ Cloud SQL est un service de base de données entièrement géré qui facilite la
    - Stockez les fichiers dans un bucket Cloud Storage
 
 2. Importation via la console
+   - Accedez à Cloud SQL Studio et créer la table "users" avec le script "create_users-table.sql"
    - Accédez à votre instance
    - Allez dans "Importation"
    - Sélectionnez le fichier source dans Cloud Storage
    - Spécifiez la base de données et les options d'importation
    - Lancez l'importation
 
-3. Importation via ligne de commande (PostgreSQL)
-   ```sql
-   -- Utilisation de la commande COPY
-   COPY nom_table FROM 'chemin/vers/fichier.csv' 
-   WITH (FORMAT CSV, HEADER, DELIMITER ',');
-   
-   -- Ou avec psql
-   \copy nom_table FROM 'chemin/vers/fichier.csv' WITH CSV HEADER DELIMITER ','
-   ```
 
 ### Méthode 2 : Importation d'un dump SQL
 1. Préparation du dump SQL

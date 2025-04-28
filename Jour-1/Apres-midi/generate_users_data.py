@@ -13,7 +13,7 @@ NB_USERS = 1000
 def generate_birth_date():
     start_date = datetime(1950, 1, 1)
     end_date = datetime(2005, 12, 31)
-    return fake.date_between(start_date=start_date, end_date=end_date)
+    return fake.date_between(start_date=start_date, end_date=end_date).strftime('%Y-%m-%d')
 
 # Fonction pour générer un numéro de téléphone français
 def generate_phone_number():
@@ -36,11 +36,26 @@ def generate_education_level():
     ]
     return random.choice(levels)
 
+# Fonction pour générer une profession détaillée
+def generate_detailed_profession():
+    base_job = fake.job()
+    specializations = [
+        "spécialisé en", "expert en", "conseiller en", "consultant en",
+        "ingénieur en", "technicien en", "analyste en", "responsable en"
+    ]
+    domains = [
+        "gestion de projet", "développement web", "analyse de données",
+        "sécurité informatique", "cloud computing", "intelligence artificielle",
+        "marketing digital", "communication", "ressources humaines",
+        "finance internationale", "logistique", "qualité"
+    ]
+    experience = f"avec {random.randint(2, 20)} ans d'expérience"
+    return f"{base_job} {random.choice(specializations)} {random.choice(domains)} {experience}"
+
 # Création des données
 users_data = []
 for _ in range(NB_USERS):
     user = {
-        'id': fake.uuid4(),
         'prenom': fake.first_name(),
         'nom': fake.last_name(),
         'email': fake.email(),
@@ -50,15 +65,15 @@ for _ in range(NB_USERS):
         'code_postal': fake.postcode(),
         'ville': fake.city(),
         'pays': 'France',
-        'profession': fake.job(),
+        'profession': generate_detailed_profession(),
         'entreprise': fake.company(),
         'salaire_annuel': random.randint(25000, 120000),
         'statut_marital': generate_marital_status(),
         'nombre_enfants': random.randint(0, 4),
         'niveau_etudes': generate_education_level(),
-        'date_inscription': fake.date_between(start_date='-5y', end_date='today'),
-        'derniere_connexion': fake.date_time_between(start_date='-1y', end_date='now'),
-        'abonne_newsletter': random.choice([True, False]),
+        'date_inscription': fake.date_between(start_date='-5y', end_date='today').strftime('%Y-%m-%d'),
+        'derniere_connexion': fake.date_time_between(start_date='-1y', end_date='now').strftime('%Y-%m-%d %H:%M:%S'),
+        'abonne_newsletter': random.choice(['true', 'false']),
         'preferences_communication': random.choice(['Email', 'SMS', 'Courrier', 'Téléphone']),
         'interets': ', '.join(random.sample([
             'Technologie', 'Sport', 'Voyage', 'Cuisine', 'Musique',
@@ -67,15 +82,12 @@ for _ in range(NB_USERS):
     }
     users_data.append(user)
 
-# Écriture dans un fichier CSV
+# Écriture dans un fichier CSV sans en-têtes
 filename = 'users_data.csv'
 with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
-    fieldnames = users_data[0].keys()
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    
-    writer.writeheader()
+    writer = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
     for user in users_data:
-        writer.writerow(user)
+        writer.writerow(user.values())
 
 print(f"Données générées avec succès dans le fichier {filename}")
 print(f"Nombre d'utilisateurs générés : {NB_USERS}") 

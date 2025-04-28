@@ -1,0 +1,22 @@
+CREATE TABLE users (
+    prenom VARCHAR(100),
+    nom VARCHAR(100),
+    email VARCHAR(255),
+    date_naissance DATE,
+    telephone VARCHAR(20),
+    adresse TEXT,
+    code_postal VARCHAR(10),
+    ville VARCHAR(100),
+    pays VARCHAR(100),
+    profession TEXT,
+    entreprise VARCHAR(100),
+    salaire_annuel INTEGER,
+    statut_marital VARCHAR(50),
+    nombre_enfants INTEGER,
+    niveau_etudes VARCHAR(100),
+    date_inscription DATE,
+    derniere_connexion TIMESTAMP,
+    abonne_newsletter BOOLEAN,
+    preferences_communication VARCHAR(50),
+    interets TEXT
+); 
