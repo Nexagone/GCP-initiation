@@ -1,0 +1,12 @@
+/vision-app
+  ├── app.py          # Application principale Flask
+  ├── requirements.txt # Dépendances
+  ├── Dockerfile      # Pour le déploiement sur Cloud Run
+  ├── static/         # Fichiers statiques (CSS, JS)
+  │   ├── css/
+  │   │   └── style.css
+  │   └── js/
+  │       └── main.js
+  └── templates/      # Templates HTML
+      ├── index.html
+      └── result.html

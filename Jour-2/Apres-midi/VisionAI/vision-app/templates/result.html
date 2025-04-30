@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block title %}Résultats - Vision AI{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Image analysée</h3>
+            </div>
+            <div class="card-body">
+                <img src="{{ results.image_url }}" alt="Image analysée" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Étiquettes détectées</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for label, score in results.labels %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ label }}
+                        <span class="badge bg-primary rounded-pill">{{ score }}%</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Points d'intérêt</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for landmark, score in results.landmarks %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ landmark }}
+                        <span class="badge bg-primary rounded-pill">{{ score }}%</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Texte détecté</h3>
+            </div>
+            <div class="card-body">
+                <p>{{ results.texts }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Analyse de sécurité</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Contenu pour adultes
+                        <span class="badge bg-{{ 'danger' if results.safe_search.adult == 'LIKELY' or results.safe_search.adult == 'VERY_LIKELY' else 'success' }} rounded-pill">
+                            {{ results.safe_search.adult }}
+                        </span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Violence
+                        <span class="badge bg-{{ 'danger' if results.safe_search.violence == 'LIKELY' or results.safe_search.violence == 'VERY_LIKELY' else 'success' }} rounded-pill">
+                            {{ results.safe_search.violence }}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a href="{{ url_for('index') }}" class="btn btn-primary">Analyser une autre image</a>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+# Fichiers de credentials et secrets
+credentials.json
+*.json
+.env
+
+# Environnement virtuel Python
+venv/
+env/
+.env/
+.venv/
+
+# Fichiers de cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Fichiers de logs
+*.log
+
+# Fichiers temporaires
+*.tmp
+*.temp
+
+# Fichiers de configuration IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Fichiers de build et distribution
+dist/
+build/
+*.egg-info/ 
