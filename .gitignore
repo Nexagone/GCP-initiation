@@ -34,3 +34,13 @@ ENV/
 # Système
 .DS_Store
 Thumbs.db
+
+# Fichiers de credentials
+**/credentials.json
+**/*.json
+**/credentials/*
+**/credentials/
+credentials.json
+*.json
+credentials/
+credentials
