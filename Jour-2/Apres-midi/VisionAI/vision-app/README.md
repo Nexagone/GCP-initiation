@@ -13,7 +13,7 @@ Cette application permet d'uploader des images et d'obtenir une analyse détaill
 
 ## Installation
 
-Veuillez consulter le [guide d'installation](../Démonstration%20:%20intégration%20d'une%20API%20d'IA%20dans%20une%20application%20web.md) pour les instructions détaillées.
+Veuillez consulter le [guide d'installation](local-guide.md) pour les instructions détaillées.
 
 ## Licence
 
